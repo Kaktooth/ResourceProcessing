@@ -31,19 +31,19 @@ namespace ResourceProcessing
             {
                 for (int i = 0; i <= 5; i++)
                 {
-                q1.resource = true;
-                q1.ProcessResource(processIndex);
+                    q1.resource = true;
+                    q1.ProcessResource(processIndex);
 
-                q2.resource = true;
-                q2.ProcessResource(processIndex);
-                if (q3 != null)
-                {
-                    q3.resource = true;
-                    q3.ProcessResource(processIndex);
-                }
+                    q2.resource = true;
+                    q2.ProcessResource(processIndex);
+                    if (q3 != null)
+                    {
+                        q3.resource = true;
+                        q3.ProcessResource(processIndex);
+                    }
 
-                Thread.Sleep(100);
-                
+                    Thread.Sleep(100);
+
                 }
                 stopWatch.Stop();
 
