@@ -18,12 +18,13 @@ namespace ResourceProcessing
         public Semaphore semaphore;
         public bool resource = false;
         public void ProcessResource(int Process1)
-        {
+        { 
             try
             {
                 if (resource)
                 {
                     semaphore.WaitOne();
+                    Thread.Sleep(100);
                     Console.WriteLine("waiting...");
                 }
 

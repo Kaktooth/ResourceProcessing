@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace ResourceProcessing
@@ -24,10 +25,12 @@ namespace ResourceProcessing
         }
         public void run()
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             try
             {
-                //for (int i = 0; i <= 5; i++)
-                //{
+                for (int i = 0; i <= 5; i++)
+                {
                 q1.resource = true;
                 q1.ProcessResource(processIndex);
 
@@ -40,8 +43,11 @@ namespace ResourceProcessing
                 }
 
                 Thread.Sleep(100);
-                Console.WriteLine($"Процес {processIndex} завершився");
-                //}
+                
+                }
+                stopWatch.Stop();
+
+                Console.WriteLine($"Процес {processIndex} завершився, час роботи {stopWatch.ElapsedMilliseconds} мiлiсекунд");
             }
             catch (Exception e)
             {
