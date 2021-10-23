@@ -5,6 +5,7 @@ namespace ResourceProcessing
 {
     public class Resource
     {
+        static object locker = new object();
         public string name { get; set; }
         public int semaphoreCount { get; set; }
 
@@ -12,25 +13,30 @@ namespace ResourceProcessing
         {
             this.semaphoreCount = semaphoreCount;
             this.name = name;
-            semaphore = new Semaphore(2, semaphoreCount);
+            resourceClosed = false;
         }
 
-        public Semaphore semaphore;
-        public bool resource = false;
-        public void ProcessResource(int Process1)
+        public bool resourceClosed;
+        public void ProcessResource(Process Process)
         {
             try
             {
-                if (resource)
+                if (resourceClosed == false)
                 {
-                    semaphore.WaitOne();
-                    Thread.Sleep(100);
-                    Console.WriteLine("waiting...");
+                    if (!Monitor.TryEnter(this))
+                    {
+                        Console.WriteLine($"Ресурс: {name} не може бути виконаним " + Process.processIndex + " процесом, тому що ресурс був зайнятий");
+                    }
+                    lock (locker)
+                    {
+                        resourceClosed = true;
+                        Console.WriteLine($"Ресурс: {name} виконується з " + Process.processIndex + " процесом");
+                        Thread.Sleep(100);
+                    }
                 }
 
-                Console.WriteLine($" Ресурс {name} користується процессом " + Process1);
-                resource = false;
-                semaphore.Release();
+                //Console.WriteLine($" Ресурс {name} користувався процессом: "+ Process.processIndex);
+                resourceClosed = false;
 
             }
             catch (Exception ex)
