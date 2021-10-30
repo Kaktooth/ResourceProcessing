@@ -25,13 +25,14 @@ namespace ResourceProcessing
                 {
                     if (!Monitor.TryEnter(this))
                     {
-                        Console.WriteLine($"Ресурс: {name} не може бути виконаним " + Process.processIndex + " процесом, тому що ресурс був зайнятий");
+                        Console.WriteLine($"Ресурс: {name} зайнятий процесом: " + Process.processIndex);
                     }
                     lock (locker)
                     {
                         resourceClosed = true;
                         Console.WriteLine($"Ресурс: {name} виконується з " + Process.processIndex + " процесом");
                         Thread.Sleep(100);
+                        Console.WriteLine($"Ресурс: {name} виконався " + Process.processIndex + " процесом");
                     }
                 }
 
