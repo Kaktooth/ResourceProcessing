@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using System.Threading.Tasks;
 
 namespace ResourceProcessing
 {
@@ -14,10 +13,10 @@ namespace ResourceProcessing
             Process p2 = new Process(r1, r2, 2);
             Process p3 = new Process(r1, r3, 3);
             Process[] processes = new Process[] { p1, p2, p3 };
-            Parallel.ForEach(processes, p => new Thread(p.run).Start());
-            //new Thread(p1.run).Start();
-            //new Thread(p2.run).Start();
-            //new Thread(p3.run).Start();
+            //Parallel.ForEach(processes, p => new Thread(p.run).Start());
+            new Thread(p1.run).Start();
+            new Thread(p2.run).Start();
+            new Thread(p3.run).Start();
 
         }
     }

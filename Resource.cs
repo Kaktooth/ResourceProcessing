@@ -23,22 +23,26 @@ namespace ResourceProcessing
             {
                 if (resourceClosed == false)
                 {
+
                     if (!Monitor.TryEnter(this))
                     {
                         Console.WriteLine($"Ресурс: {name} зайнятий процесом: " + Process.processIndex);
+
                     }
+
                     lock (locker)
                     {
                         resourceClosed = true;
                         Console.WriteLine($"Ресурс: {name} виконується з " + Process.processIndex + " процесом");
                         Thread.Sleep(100);
                         Console.WriteLine($"Ресурс: {name} виконався " + Process.processIndex + " процесом");
+                       
                     }
+
                 }
 
                 //Console.WriteLine($" Ресурс {name} користувався процессом: "+ Process.processIndex);
                 resourceClosed = false;
-
             }
             catch (Exception ex)
             {

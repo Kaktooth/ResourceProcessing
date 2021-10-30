@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace ResourceProcessing
 {
@@ -41,11 +40,7 @@ namespace ResourceProcessing
                     q3.ProcessResource(this);
                 }
 
-                Thread.Sleep(100);
-
-
                 stopWatch.Stop();
-
                 Console.WriteLine($"Процес {processIndex} завершився, час роботи {stopWatch.ElapsedMilliseconds} мiлiсекунд");
             }
             catch (Exception e)
